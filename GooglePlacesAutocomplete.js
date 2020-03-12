@@ -15,7 +15,6 @@ import {
   Keyboard,
 } from "react-native"
 import Qs from "qs"
-import debounce from "lodash.debounce"
 import { TextInput } from "react-native-paper"
 import _ from "lodash"
 const WINDOW = Dimensions.get("window")
@@ -115,7 +114,7 @@ export default class GooglePlacesAutocomplete extends Component {
 
   componentWillMount() {
     this._request = this.props.debounce
-        ? debounce(this._request, this.props.debounce)
+        ? _.debounce(this._request, this.props.debounce)
         : this._request
   }
 

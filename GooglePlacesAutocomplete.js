@@ -879,6 +879,7 @@ GooglePlacesAutocomplete.propTypes = {
   timeout: PropTypes.number,
   onTimeout: PropTypes.func,
   query: PropTypes.object,
+  GooglePlaceTypes: PropTypes.array,
   GoogleReverseGeocodingQuery: PropTypes.object,
   GooglePlacesSearchQuery: PropTypes.object,
   GooglePlacesDetailsQuery: PropTypes.object,

@@ -760,12 +760,12 @@ export default class GooglePlacesAutocomplete extends Component {
             this.props.currentLocation === true) &&
         this.state.listViewDisplayed === true
     ) {
-      const filterPlaceTypesSources = this.props.GooglePlaceTypes
+      const dataSourcesFiltered = this.props.GooglePlaceTypes
           ? _.filter(this.state.dataSource, data =>
               !_.isEmpty(_.intersection(data.types, this.props.GooglePlaceTypes)),
           )
           : this.state.dataSource
-      return _.isEmpty(filterPlaceTypesSources) ? null : (
+      return _.isEmpty(dataSourcesFiltered) ? null : (
           <View
               style={{
                 shadowOffset: {
@@ -782,9 +782,9 @@ export default class GooglePlacesAutocomplete extends Component {
                   this.props.suppressDefaultStyles ? {} : defaultStyles.listView,
                   this.props.styles.listView,
                 ]}
-                data={filterPlaceTypesSources}
+                data={dataSourcesFiltered}
                 keyExtractor={keyGenerator}
-                extraData={[filterPlaceTypesSources, this.props]}
+                extraData={[dataSourcesFiltered, this.props]}
                 ItemSeparatorComponent={this._renderSeparator}
                 renderItem={({ item }) => this._renderRow(item)}
                 ListHeaderComponent={

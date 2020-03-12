@@ -17,7 +17,7 @@ import {
 import Qs from "qs"
 import debounce from "lodash.debounce"
 import { TextInput } from "react-native-paper"
-
+import _ from "lodash"
 const WINDOW = Dimensions.get("window")
 
 const defaultStyles = {
@@ -760,7 +760,12 @@ export default class GooglePlacesAutocomplete extends Component {
             this.props.currentLocation === true) &&
         this.state.listViewDisplayed === true
     ) {
-      return (
+      const filterPlaceTypesSources = this.props.GooglePlaceTypes
+          ? _.filter(this.state.dataSource, data =>
+              !_.isEmpty(_.intersection(data.types, this.props.GooglePlaceTypes)),
+          )
+          : this.state.dataSource
+      return _.isEmpty(filterPlaceTypesSources) ? null : (
           <View
               style={{
                 shadowOffset: {
@@ -777,9 +782,9 @@ export default class GooglePlacesAutocomplete extends Component {
                   this.props.suppressDefaultStyles ? {} : defaultStyles.listView,
                   this.props.styles.listView,
                 ]}
-                data={this.state.dataSource}
+                data={filterPlaceTypesSources}
                 keyExtractor={keyGenerator}
-                extraData={[this.state.dataSource, this.props]}
+                extraData={[filterPlaceTypesSources, this.props]}
                 ItemSeparatorComponent={this._renderSeparator}
                 renderItem={({ item }) => this._renderRow(item)}
                 ListHeaderComponent={

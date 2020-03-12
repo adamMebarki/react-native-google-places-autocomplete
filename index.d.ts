@@ -374,6 +374,7 @@ interface GooglePlacesAutocompleteProps extends TextInputProps {
     predefinedPlacesAlwaysVisible?: boolean
     enableEmptySections?: boolean
     textInputHide?: boolean
+    GooglePlaceTypes?: PlaceType[]
 }
 
 export class GooglePlacesAutocomplete extends React.Component<
